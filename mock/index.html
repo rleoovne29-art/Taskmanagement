@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タスク管理アプリ（モック）</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>タスク管理</h1>
+  </header>
+
+  <main class="board" id="board">
+    <!-- 列（To Do / Doing / Done）はscript.jsで描画 -->
+  </main>
+
+  <!-- カードのテンプレート -->
+  <template id="card-template">
+    <div class="card" draggable="true">
+      <p class="card-title"></p>
+      <div class="card-meta">
+        <span class="card-priority"></span>
+        <span class="card-due"></span>
+      </div>
+      <div class="card-actions">
+        <button class="btn-edit" type="button">編集</button>
+        <button class="btn-delete" type="button">削除</button>
+        <button class="btn-move" type="button">→</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- カード編集フォームのテンプレート -->
+  <template id="card-edit-template">
+    <div class="card card-editing">
+      <input type="text" class="input-title" placeholder="タスク名">
+      <select class="input-priority">
+        <option value="high">優先度: 高</option>
+        <option value="medium">優先度: 中</option>
+        <option value="low">優先度: 低</option>
+      </select>
+      <input type="date" class="input-due">
+      <div class="card-actions">
+        <button class="btn-save" type="button">保存</button>
+        <button class="btn-cancel" type="button">キャンセル</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- カード追加フォームのテンプレート -->
+  <template id="card-add-template">
+    <div class="card card-editing">
+      <input type="text" class="input-title" placeholder="タスク名を入力">
+      <select class="input-priority">
+        <option value="high">優先度: 高</option>
+        <option value="medium" selected>優先度: 中</option>
+        <option value="low">優先度: 低</option>
+      </select>
+      <input type="date" class="input-due">
+      <div class="card-actions">
+        <button class="btn-save" type="button">追加</button>
+        <button class="btn-cancel" type="button">キャンセル</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background: #f4f5f7;
+  color: #172b4d;
+}
+
+.app-header {
+  background: #0079bf;
+  color: #fff;
+  padding: 16px 24px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.board {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.column {
+  background: #ebecf0;
+  border-radius: 8px;
+  width: 280px;
+  flex-shrink: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 120px;
+}
+
+.column.drag-over {
+  outline: 2px dashed #0079bf;
+  outline-offset: -4px;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 4px 4px 0;
+}
+
+.column-count {
+  font-size: 12px;
+  color: #6b778c;
+  background: #dfe1e6;
+  border-radius: 10px;
+  padding: 1px 8px;
+}
+
+.sort-controls {
+  display: flex;
+  gap: 6px;
+  padding: 0 4px 4px;
+}
+
+.btn-sort {
+  flex: 1;
+  font-size: 11px;
+  border: 1px solid #dfe1e6;
+  background: #fff;
+  color: #42526e;
+  border-radius: 4px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.btn-sort:hover {
+  background: #f4f5f7;
+  border-color: #c1c7d0;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.btn-add {
+  background: none;
+  border: none;
+  text-align: left;
+  color: #42526e;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-add:hover {
+  background: #dfe1e6;
+}
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 10px 8px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25);
+  border-left: 5px solid #dfe1e6;
+  cursor: grab;
+}
+
+.card.dragging {
+  opacity: 0.4;
+}
+
+.card.priority-high {
+  border-left-color: #eb5a46;
+}
+
+.card.priority-medium {
+  border-left-color: #f2d600;
+}
+
+.card.priority-low {
+  border-left-color: #61bd4f;
+}
+
+.card-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.card-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #5e6c84;
+  margin-bottom: 6px;
+}
+
+.card-priority {
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #dfe1e6;
+}
+
+.card.priority-high .card-priority {
+  background: #ffe1de;
+  color: #ac2b1e;
+}
+
+.card.priority-medium .card-priority {
+  background: #fff6c8;
+  color: #806b00;
+}
+
+.card.priority-low .card-priority {
+  background: #e3f8de;
+  color: #2e6b1f;
+}
+
+.card-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.card-actions button {
+  font-size: 12px;
+  border: none;
+  background: #f4f5f7;
+  border-radius: 3px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.card-actions button:hover {
+  background: #e4e6ea;
+}
+
+.btn-delete:hover {
+  background: #ffe1de;
+}
+
+.card-editing {
+  cursor: default;
+}
+
+.card-editing input,
+.card-editing select {
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 6px;
+  font-size: 13px;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+}
+
+.btn-save {
+  background: #0079bf;
+  color: #fff;
+}
+
+.btn-save:hover {
+  background: #026aa7;
+}
