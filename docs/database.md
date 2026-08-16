@@ -23,13 +23,15 @@ erDiagram
 
 | カラム名 | 型 | 制約 | 説明 |
 |----------|----|----|------|
-| id | int | PK, AUTO_INCREMENT | 主キー |
+| id | bigint | PK, GENERATED ALWAYS AS IDENTITY | 主キー |
 | title | varchar | NOT NULL | タスク名 |
 | due_date | date | NULL可 | 期限日 |
-| priority | enum('high','medium','low') | NOT NULL, デフォルト 'medium' | 優先度 |
-| status | enum('todo','doing','done') | NOT NULL | 列（ステータス） |
-| created_at | datetime | NOT NULL | 作成日時 |
-| updated_at | datetime | NOT NULL | 更新日時 |
+| priority | varchar（CHECK制約で'high','medium','low'に限定） | NOT NULL, デフォルト 'medium' | 優先度 |
+| status | varchar（CHECK制約で'todo','doing','done'に限定） | NOT NULL | 列（ステータス） |
+| created_at | timestamp | NOT NULL | 作成日時 |
+| updated_at | timestamp | NOT NULL | 更新日時 |
+
+※ PostgreSQLにはMySQLのようなネイティブenum型はあるが列挙値の変更が煩雑なため、本プロジェクトでは`varchar + CHECK制約`で表現する（Java側ではEnum型として扱い、JPAでマッピングする）。
 
 ## 4. 拡張時の設計変更方針
 複数ボード対応などの拡張を行う場合は、`boards`テーブル・`columns`テーブルを追加し、`cards`テーブルから外部キーで参照する形に発展させる。詳細は[今後の拡張候補](./future.md)を参照。
