@@ -7,7 +7,7 @@ Java + Spring Boot + Gradle + Spring Data JPA + PostgreSQL のひな型。
 
 ### 事前準備
 - Java 21（LTS）
-- PostgreSQL（`taskmanagement` という名前のデータベースを作成しておく）
+- Docker Desktop（または Docker Engine + Docker Compose）— PostgreSQLをコンテナで起動するために使用
 
 接続情報は環境変数で上書きできる（未設定時はローカル開発用のデフォルト値を使用）:
 
@@ -17,6 +17,19 @@ Java + Spring Boot + Gradle + Spring Data JPA + PostgreSQL のひな型。
 | `DB_USERNAME` | `postgres` |
 | `DB_PASSWORD` | `postgres` |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` |
+
+### PostgreSQLの起動（Docker）
+リポジトリルートの `docker-compose.yml` でPostgreSQLコンテナを起動する（`taskmanagement` データベースはコンテナ初回起動時に自動作成される）。接続情報を変更したい場合は `.env.example` を `.env` にコピーして編集する。
+
+```
+docker compose up -d
+```
+
+停止・データ削除:
+```
+docker compose down      # コンテナを停止
+docker compose down -v   # コンテナ停止 + データボリュームも削除
+```
 
 ### 起動方法
 ```
