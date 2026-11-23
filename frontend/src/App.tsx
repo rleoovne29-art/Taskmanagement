@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
-import { fetchCards } from './api/cardApi.js'
-import Board from './components/Board.jsx'
-import SearchBar from './components/SearchBar.jsx'
+import { fetchCards } from './api/cardApi.ts'
+import Board from './components/Board.tsx'
+import SearchBar from './components/SearchBar.tsx'
+import type { Card } from './types.ts'
 import './App.css'
 
 export default function App() {
   // 検索のたびに新しいオブジェクトにするので、同じキーワードでも再取得できる
   const [query, setQuery] = useState({ keyword: '' })
   const { keyword } = query
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState<Card[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // cleanup で abort するので、連続検索時は古いリクエストの結果が反映されない
@@ -20,7 +21,7 @@ export default function App() {
         setCards(data)
         setLoading(false)
       })
-      .catch((e) => {
+      .catch((e: Error) => {
         if (e.name === 'AbortError') return
         setCards([])
         setError(e.message)
@@ -29,7 +30,7 @@ export default function App() {
     return () => controller.abort()
   }, [query])
 
-  const handleSearch = (input) => {
+  const handleSearch = (input: string) => {
     setLoading(true)
     setError(null)
     setQuery({ keyword: input.trim() })

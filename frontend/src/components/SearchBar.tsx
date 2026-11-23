@@ -1,9 +1,16 @@
 import { useState } from 'react'
+import type { SubmitEvent } from 'react'
 
-export default function SearchBar({ initialKeyword = '', onSearch, disabled }) {
+interface Props {
+  initialKeyword?: string
+  onSearch: (keyword: string) => void
+  disabled?: boolean
+}
+
+export default function SearchBar({ initialKeyword = '', onSearch, disabled }: Props) {
   const [value, setValue] = useState(initialKeyword)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     onSearch(value)
   }

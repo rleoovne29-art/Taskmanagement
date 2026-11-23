@@ -43,7 +43,7 @@ cd backend
 
 
 ## フロントエンド（frontend/）
-React + Vite（JavaScript）。カードを To Do / Doing / Done の3列ボードで表示し、タスク名で検索できる。
+React + Vite（TypeScript）。カードを To Do / Doing / Done の3列ボードで表示し、タスク名で検索できる。
 
 ### 起動方法
 バックエンド（`http://localhost:8080`）を起動した状態で、以下を実行する。

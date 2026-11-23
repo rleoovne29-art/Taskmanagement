@@ -1,6 +1,12 @@
-const PRIORITY_LABELS = { HIGH: '高', MEDIUM: '中', LOW: '低' }
+import type { Card as CardData, Priority } from '../types.ts'
 
-export default function Card({ card }) {
+const PRIORITY_LABELS: Record<Priority, string> = { HIGH: '高', MEDIUM: '中', LOW: '低' }
+
+interface Props {
+  card: CardData
+}
+
+export default function Card({ card }: Props) {
   const priority = card.priority ?? 'MEDIUM'
   return (
     <div className={`card priority-${priority.toLowerCase()}`}>

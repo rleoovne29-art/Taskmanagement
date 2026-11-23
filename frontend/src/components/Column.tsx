@@ -1,6 +1,12 @@
-import Card from './Card.jsx'
+import type { Card as CardData } from '../types.ts'
+import Card from './Card.tsx'
 
-export default function Column({ title, cards }) {
+interface Props {
+  title: string
+  cards: CardData[]
+}
+
+export default function Column({ title, cards }: Props) {
   return (
     <section className="column" aria-label={title}>
       <div className="column-header">
