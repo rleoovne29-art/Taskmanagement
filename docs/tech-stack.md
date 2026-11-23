@@ -28,15 +28,21 @@
 
 ## 2. 技術選定
 
-| 項目 | 採用technology | 選定理由 |
-|------|--------------|----------|
-| フロントエンド | React（Next.jsは今回は対象外） | コンポーネント単位でのUI構築を学びつつ、Next.js特有のルーティング・SSR等は範囲外とし、素のReact（SPA）の基礎に集中するため |
-| フロントエンド言語 | TypeScript（strictモード） | 型安全性を高め、`tsc` による型チェックをビルド（`npm run build`）に含めるため |
-| フロントエンドビルドツール | Vite | 現行のReact構成で標準的に使われる高速なビルドツールで、セットアップが容易なため |
-| 画面の動き・API通信 | TypeScript + fetch API | 追加のHTTPクライアントライブラリに頼らず、Web標準APIでバックエンドとの通信を実装する。APIのレスポンス（カード）や列・優先度の値を型で表し、フロントとバックエンドの食い違いをビルド時に検出するため |
-| カード移動の実装 | HTML5 Drag and Drop API（Reactのイベントハンドラ経由） | 追加ライブラリなしでドラッグ&ドロップを実装し、Web標準APIの使い方を学ぶため |
-| バックエンド言語・フレームワーク | Java + Spring Boot | 実務で広く使われる静的型付け言語とフレームワークであり、DI・レイヤードアーキテクチャなど実践的なバックエンド設計を学べるため |
-| バックエンドビルドツール | Gradle | Spring Bootプロジェクトで標準的に使われる依存管理・ビルドツールの一つで、簡潔なビルドスクリプトを書けるため |
-| ORM・永続化 | Spring Data JPA（Hibernate） | Spring Bootと親和性が高く、Javaオブジェクトとテーブルのマッピングを通じてORMの基礎を学べるため |
-| 入力バリデーション | Spring Boot Validation（Bean Validation） | リクエストの入力チェックをアノテーションベースで宣言的に実装できるため |
-| データベース | PostgreSQL | 実務でよく使われるRDBの一つであり、SQLとリレーショナルデータ設計の基礎を学べるため |
+バージョンは環境構築した時点（2026-11）のもの。フロントエンドは `package-lock.json` で解決済みのバージョン、バックエンドは `build.gradle` / Gradle Wrapper の指定に基づく。
+
+| 項目 | 採用技術 | バージョン | 選定理由 |
+|------|--------|-----------|----------|
+| フロントエンド | React（Next.jsは今回は対象外） | 19.3.1（react / react-dom） | コンポーネント単位でのUI構築を学びつつ、Next.js特有のルーティング・SSR等は範囲外とし、素のReact（SPA）の基礎に集中するため |
+| フロントエンド言語 | TypeScript（strictモード） | 7.0.2 | 型安全性を高め、`tsc` による型チェックをビルド（`npm run build`）に含めるため |
+| フロントエンドビルドツール | Vite（+ @vitejs/plugin-react） | 8.3.8（plugin-react 6.3.0） | 現行のReact構成で標準的に使われる高速なビルドツールで、セットアップが容易なため |
+| フロントエンド静的解析 | oxlint | 1.94.0 | 高速なLinterで `npm run lint` による静的解析を行うため |
+| フロントエンド実行環境 | Node.js / npm | Node.js 24.18.0 | Viteのビルド・開発サーバーの実行に必要なため |
+| 画面の動き・API通信 | TypeScript + fetch API | （Web標準API） | 追加のHTTPクライアントライブラリに頼らず、Web標準APIでバックエンドとの通信を実装する。APIのレスポンス（カード）や列・優先度の値を型で表し、フロントとバックエンドの食い違いをビルド時に検出するため |
+| カード移動の実装 | HTML5 Drag and Drop API（Reactのイベントハンドラ経由） | （Web標準API） | 追加ライブラリなしでドラッグ&ドロップを実装し、Web標準APIの使い方を学ぶため |
+| バックエンド言語 | Java | 21（LTS） | 実務で広く使われる静的型付け言語であり、LTS版を使うため |
+| バックエンドフレームワーク | Spring Boot | 4.1.0 | DI・レイヤードアーキテクチャなど実践的なバックエンド設計を学べるため |
+| バックエンドビルドツール | Gradle（Gradle Wrapper） | 9.5.1 | Spring Bootプロジェクトで標準的に使われる依存管理・ビルドツールの一つで、簡潔なビルドスクリプトを書けるため |
+| ORM・永続化 | Spring Data JPA（Hibernate） | Spring Boot 4.1.0 の依存管理に従う | Spring Bootと親和性が高く、Javaオブジェクトとテーブルのマッピングを通じてORMの基礎を学べるため |
+| 入力バリデーション | Spring Boot Validation（Bean Validation） | Spring Boot 4.1.0 の依存管理に従う | リクエストの入力チェックをアノテーションベースで宣言的に実装できるため |
+| データベース | PostgreSQL（Dockerイメージ `postgres:16-alpine`） | 16 | 実務でよく使われるRDBの一つであり、SQLとリレーショナルデータ設計の基礎を学べるため |
+| コンテナ実行環境 | Docker Desktop / Docker Compose | 最新版 | PostgreSQLをローカルで簡単に起動・破棄するため |
