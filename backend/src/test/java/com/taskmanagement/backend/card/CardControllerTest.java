@@ -31,13 +31,32 @@ class CardControllerTest {
 
     @Test
     void 全件取得はカードの一覧を返す() throws Exception {
-        given(cardService.findAll()).willReturn(List.of(sample(1, "A"), sample(2, "B")));
+        given(cardService.search(null, null, null)).willReturn(List.of(sample(1, "A"), sample(2, "B")));
 
         mockMvc.perform(get("/api/cards"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].title").value("A"))
                 .andExpect(jsonPath("$[1].priority").value("HIGH"));
+    }
+
+    @Test
+    void 検索条件はサービスへ渡される() throws Exception {
+        given(cardService.search("資料", Status.TODO, Priority.HIGH)).willReturn(List.of(sample(1, "資料作成")));
+
+        mockMvc.perform(get("/api/cards")
+                        .param("keyword", "資料")
+                        .param("status", "TODO")
+                        .param("priority", "HIGH"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].title").value("資料作成"));
+    }
+
+    @Test
+    void 不正なstatusは400を返す() throws Exception {
+        mockMvc.perform(get("/api/cards").param("status", "INVALID"))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

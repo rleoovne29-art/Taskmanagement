@@ -15,8 +15,17 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
-    public List<CardResponse> findAll() {
-        return cardRepository.findAll().stream()
+    /**
+     * カードを検索する。条件はすべて任意で、未指定（null・空白）の条件は無視する。
+     * keyword はタイトルの部分一致（大文字小文字を区別しない）。
+     */
+    public List<CardResponse> search(String keyword, Status status, Priority priority) {
+        List<Card> cards = (keyword == null || keyword.isBlank())
+                ? cardRepository.findAll()
+                : cardRepository.findByTitleContainingIgnoreCase(keyword.trim());
+        return cards.stream()
+                .filter(card -> status == null || card.getStatus() == status)
+                .filter(card -> priority == null || card.getPriority() == priority)
                 .map(CardResponse::from)
                 .toList();
     }

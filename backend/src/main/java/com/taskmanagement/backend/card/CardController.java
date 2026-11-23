@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,10 @@ public class CardController {
     }
 
     @GetMapping
-    public List<CardResponse> findAll() {
-        return cardService.findAll();
+    public List<CardResponse> search(@RequestParam(required = false) String keyword,
+                                     @RequestParam(required = false) Status status,
+                                     @RequestParam(required = false) Priority priority) {
+        return cardService.search(keyword, status, priority);
     }
 
     @GetMapping("/{id}")
