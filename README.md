@@ -39,3 +39,5 @@ cd backend
 起動すると `http://localhost:8080` でAPIが立ち上がる（`GET/POST /api/cards`、`PUT/DELETE /api/cards/{id}`）。
 テーブルは起動時に`spring.jpa.hibernate.ddl-auto=update`により自動作成される（本番運用ではFlyway等への切り替えを推奨）。
 
+
+

@@ -21,6 +21,12 @@ public class CardService {
                 .toList();
     }
 
+    public CardResponse findById(Long id) {
+        return cardRepository.findById(id)
+                .map(CardResponse::from)
+                .orElseThrow(() -> new CardNotFoundException(id));
+    }
+
     @Transactional
     public CardResponse create(CardRequest request) {
         Card card = new Card(request.title(), request.dueDate(), request.priority(), request.status());
