@@ -41,3 +41,18 @@ cd backend
 
 
 
+
+## フロントエンド（frontend/）
+React + Vite（JavaScript）。カードを To Do / Doing / Done の3列ボードで表示し、タスク名で検索できる。
+
+### 起動方法
+バックエンド（`http://localhost:8080`）を起動した状態で、以下を実行する。
+```
+cd frontend
+npm install
+npm run dev
+```
+`http://localhost:5173` で画面が開く（バックエンドのCORS許可オリジンと同じポート）。
+APIのURLを変える場合は `frontend/.env.example` を `.env` にコピーして `VITE_API_BASE_URL` を編集する。
+
+その他: `npm run build`（本番ビルド）、`npm run lint`（静的解析）。

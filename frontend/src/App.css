@@ -1,0 +1,131 @@
+.app-header {
+  background: #0079bf;
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.search-bar input {
+  width: 260px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-bar button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  color: #0079bf;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-bar button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.message {
+  margin: 16px 24px 0;
+  color: #5e6c84;
+}
+
+.message.error {
+  color: #ac2b1e;
+  background: #ffe1de;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.board {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.column {
+  background: #ebecf0;
+  border-radius: 8px;
+  width: 280px;
+  flex-shrink: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 120px;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 4px 4px 0;
+}
+
+.column-count {
+  font-size: 12px;
+  color: #6b778c;
+  background: #dfe1e6;
+  border-radius: 10px;
+  padding: 1px 8px;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25);
+  border-left: 5px solid #dfe1e6;
+}
+
+.card.priority-high { border-left-color: #eb5a46; }
+.card.priority-medium { border-left-color: #f2d600; }
+.card.priority-low { border-left-color: #61bd4f; }
+
+.card-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.card-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #5e6c84;
+}
+
+.card-priority {
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #dfe1e6;
+}
+
+.card.priority-high .card-priority { background: #ffe1de; color: #ac2b1e; }
+.card.priority-medium .card-priority { background: #fff6c8; color: #806b00; }
+.card.priority-low .card-priority { background: #e3f8de; color: #2e6b1f; }
