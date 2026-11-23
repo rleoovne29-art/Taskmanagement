@@ -29,6 +29,11 @@ public class CardController {
         return cardService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public CardResponse findById(@PathVariable Long id) {
+        return cardService.findById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CardResponse create(@Valid @RequestBody CardRequest request) {
