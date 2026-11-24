@@ -38,7 +38,8 @@ public class CardService {
 
     @Transactional
     public CardResponse create(CardRequest request) {
-        Card card = new Card(request.title(), request.dueDate(), request.priority(), request.status());
+        Status status = request.status() != null ? request.status() : Status.TODO;
+        Card card = new Card(request.title().trim(), request.dueDate(), request.priority(), status);
         Card saved = cardRepository.save(card);
         return CardResponse.from(saved);
     }
@@ -47,10 +48,12 @@ public class CardService {
     public CardResponse update(Long id, CardRequest request) {
         Card card = cardRepository.findById(id)
                 .orElseThrow(() -> new CardNotFoundException(id));
-        card.setTitle(request.title());
+        card.setTitle(request.title().trim());
         card.setDueDate(request.dueDate());
         card.setPriority(request.priority());
-        card.setStatus(request.status());
+        if (request.status() != null) {
+            card.setStatus(request.status());
+        }
         return CardResponse.from(card);
     }
 
