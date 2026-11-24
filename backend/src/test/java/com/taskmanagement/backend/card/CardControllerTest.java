@@ -3,6 +3,7 @@ package com.taskmanagement.backend.card;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -67,6 +69,38 @@ class CardControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.status").value("TODO"));
+    }
+
+    @Test
+    void 登録は201と作成されたカードを返す() throws Exception {
+        given(cardService.create(new CardRequest("資料作成", LocalDate.of(2026, 2, 1), Priority.HIGH, null)))
+                .willReturn(sample(10, "資料作成"));
+
+        mockMvc.perform(post("/api/cards")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\":\"資料作成\",\"dueDate\":\"2026-02-01\",\"priority\":\"HIGH\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(10))
+                .andExpect(jsonPath("$.title").value("資料作成"))
+                .andExpect(jsonPath("$.status").value("TODO"));
+    }
+
+    @Test
+    void タイトルが空の登録は400を返す() throws Exception {
+        mockMvc.perform(post("/api/cards")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\":\"  \"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.fieldErrors.title").exists());
+    }
+
+    @Test
+    void タイトルが長すぎる登録は400を返す() throws Exception {
+        mockMvc.perform(post("/api/cards")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\":\"" + "a".repeat(256) + "\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.fieldErrors.title").exists());
     }
 
     @Test
